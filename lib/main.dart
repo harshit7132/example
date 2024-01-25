@@ -1,109 +1,49 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyAPP());
+}
 
-class MyApp extends StatelessWidget {
+class MyAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NeumorphicApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      themeMode: ThemeMode.light,
-      theme: NeumorphicThemeData(
-        baseColor: Color(0xFFFFFFFF),
-        lightSource: LightSource.topLeft,
-        depth: 10,
-      ),
-      darkTheme: NeumorphicThemeData(
-        baseColor: Color(0xFF3E3E3E),
-        lightSource: LightSource.topLeft,
-        depth: 6,
-      ),
-      home: MyHomePage(),
+      title: 'MyApp',
+      home: MyHome(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
-
+class MyHome extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: NeumorphicFloatingActionButton(
-        child: Icon(Icons.add, size: 30),
-        onPressed: () {},
-      ),
-      backgroundColor: NeumorphicTheme.baseColor(context),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            NeumorphicButton(
-              onPressed: () {
-                print("onClick");
-              },
-              style: NeumorphicStyle(
-                shape: NeumorphicShape.flat,
-                boxShape: NeumorphicBoxShape.circle(),
-              ),
-              padding: const EdgeInsets.all(12.0),
-              child: Icon(
-                Icons.favorite_border,
-                color: _iconsColor(context),
-              ),
-            ),
-            NeumorphicButton(
-                margin: EdgeInsets.only(top: 12),
-                onPressed: () {
-                  NeumorphicTheme.of(context)!.themeMode =
-                      NeumorphicTheme.isUsingDark(context)
-                          ? ThemeMode.light
-                          : ThemeMode.dark;
-                },
-                style: NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  boxShape:
-                      NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-                ),
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  "Toggle Theme",
-                  style: TextStyle(color: _textColor(context)),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ///text field
+            Container(
+                height: 50,
+                width: 350,
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade400,
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextField(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(borderSide: BorderSide.none)),
                 )),
-            NeumorphicButton(
-                margin: EdgeInsets.only(top: 12),
-                onPressed: () {},
-                style: NeumorphicStyle(
-                  shape: NeumorphicShape.flat,
-                  boxShape:
-                      NeumorphicBoxShape.roundRect(BorderRadius.circular(8)),
-                ),
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  "Go to full sample",
-                  style: TextStyle(color: _textColor(context)),
-                )),
+
+            ///text
+            Text(
+              'Best of the month',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            )
           ],
         ),
       ),
     );
-  }
-
-  Color? _iconsColor(BuildContext context) {
-    final theme = NeumorphicTheme.of(context);
-    if (theme!.isUsingDark) {
-      return theme.current!.accentColor;
-    } else {
-      return null;
-    }
-  }
-
-  Color _textColor(BuildContext context) {
-    if (NeumorphicTheme.isUsingDark(context)) {
-      return Colors.white;
-    } else {
-      return Colors.black;
-    }
   }
 }
